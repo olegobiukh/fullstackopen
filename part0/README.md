@@ -1,4 +1,7 @@
 # Part 0
+
+[link](https://fullstackopen.com/en/part0/fundamentals_of_web_apps)
+
 ## 1. Exercise 04
 POST -> 302 Redirect -> Full page reload.
 __________________________________________________________

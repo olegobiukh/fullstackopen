@@ -1,20 +1,26 @@
 const Persons = ({ persons, filter, onDelete }) => {
   return (
-    <ul>
-      {persons
-        .filter((person) => {
-          const name = person.name ? person.name.toLowerCase() : "";
-          const filterTerm = filter ? filter.toLowerCase() : "";
+    <table>
+      <tbody>
+        {persons
+          .filter((person) => {
+            const name = person.name ? person.name.toLowerCase() : "";
+            const filterTerm = filter ? filter.toLowerCase() : "";
 
-          return name.includes(filterTerm);
-        })
-        .map((person) => (
-          <li key={person.name}>
-            {person.name} - {person.number}
-            <button onClick={() => onDelete(person.id)}>delete</button>
-          </li>
-        ))}
-    </ul>
+            return name.includes(filterTerm);
+          })
+          .map((person) => (
+            <tr key={person.name}>
+              <td>
+                {person.name} - {person.number}
+              </td>
+              <td>
+                <button onClick={() => onDelete(person.id)}>delete</button>
+              </td>
+            </tr>
+          ))}
+      </tbody>
+    </table>
   );
 };
 

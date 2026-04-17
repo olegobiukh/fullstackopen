@@ -24,6 +24,16 @@
       "name": "Sherlok Holmes",
       "number": "39-44-549",
       "id": "X1mw9-o1-KM"
+    },
+    {
+      "name": "Anna Sherlok",
+      "number": "45 146 841 999",
+      "id": "eO6OrJZn46c"
+    },
+    {
+      "name": "Henry Ford",
+      "number": "2342 342  24",
+      "id": "5OzKdF8MegY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

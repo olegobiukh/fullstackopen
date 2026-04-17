@@ -20,28 +20,59 @@ const App = () => {
   const handleNewName = (event) => {
     setNewName(event.target.value);
   };
+
   const handleNewNumber = (event) => {
     setNewNumber(event.target.value);
   };
+
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
+
   const addPerson = (event) => {
     event.preventDefault();
-    if (persons.some((person) => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`);
-      return;
-    }
 
-    personsService.create({ name: newName, number: newNumber }).then((data) => {
-      setPersons(persons.concat(data));
-    });
-    setNewName("");
-    setNewNumber("");
+    const existingPerson = persons.find((person) => person.name === newName);
+    if (existingPerson) {
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old number with a new one?`,
+        )
+      ) {
+        const id = existingPerson.id;
+        const changedPerson = { ...existingPerson, number: newNumber };
+        personsService.update(id, changedPerson).then((data) => {
+          setPersons(
+            persons.map((person) => (person.id !== id ? person : data)),
+          );
+          setNewName("");
+          setNewNumber("");
+        });
+      } else {
+        return;
+      }
+    } else {
+      if (persons.some((person) => person.name === newName)) {
+        alert(`${newName} is already added to phonebook`);
+        return;
+      }
+
+      personsService
+        .create({ name: newName, number: newNumber })
+        .then((data) => {
+          setPersons(persons.concat(data));
+          setNewName("");
+          setNewNumber("");
+        });
+    }
   };
 
   const handleDeletePerson = (id) => {
-    if (window.confirm(`Delete ${persons.find((person) => person.id === id)?.name}?`)) {
+    if (
+      window.confirm(
+        `Delete ${persons.find((person) => person.id === id)?.name}?`,
+      )
+    ) {
       personsService.remove(id).then(() => {
         setPersons(persons.filter((person) => person.id !== id));
       });

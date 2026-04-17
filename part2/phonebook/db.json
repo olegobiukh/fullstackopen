@@ -24,11 +24,6 @@
       "name": "Sherlok Holmes",
       "number": "456 45",
       "id": "X1mw9-o1-KM"
-    },
-    {
-      "name": "Ana Holmes",
-      "number": "45 68 1786 87",
-      "id": "IYegSrQNY2Q"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

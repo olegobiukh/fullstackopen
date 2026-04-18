@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 import countryData from "./services/countries";
+import "./App.css";
+import Country from "./components/Country";
+import CountryList from "./components/CountryList";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [countries, setCountries] = useState([]);
-  // https://studies.cs.helsinki.fi/restcountries/
+  const [country, setCountry] = useState(null);
+  const [countriesToShow, setCountriesToShow] = useState([]);
 
+  useEffect(() => {
+    countryData.getAll().then((data) => {
+      setCountries(data);
+    });
+  }, []);
   useEffect(() => {
     countryData.getAll().then((data) => {
       setCountries(data);
@@ -13,13 +22,29 @@ const App = () => {
   }, []);
 
   const handleCountryChange = (event) => {
-    setSearchTerm(event.target.value);
+    setCountry(null);
+    const sTerms = event.target.value;
+    setSearchTerm(sTerms);
+
+    const filteredCountries = countries.filter((country) =>
+      country.name.common.toLowerCase().includes(sTerms.toLowerCase()),
+    );
+    setCountriesToShow(filteredCountries);
+
+    if (filteredCountries.length === 1) {
+      setCountry(filteredCountries[0]);
+    } else {
+      setCountry(0);
+    }
   };
 
-  const countriesToShow = countries.filter((country) =>
-    country.name.common.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-  const country = countriesToShow[0];
+  const handleCCA = (cca3) => {
+    const country = countries.find((c) => c.cca3 === cca3);
+
+    setCountry(country);
+    setSearchTerm(country.name.common);
+  };
+
   return (
     <div>
       <div>
@@ -29,36 +54,19 @@ const App = () => {
       <div>
         {searchTerm && (
           <div>
-            {countriesToShow.length === 1 && (
-              <div key={country.name.common}>
-                <h1>{country.name.common}</h1>
-                <p>
-                  <b>Capital:</b> {country.capital}
-                </p>
-                <p>
-                  <b>Area:</b> {country.area}
-                </p>
-                <h1>Languages</h1>
-                <ul>
-                  {Object.values(country.languages).map((language) => (
-                    <li key={language}>{language}</li>
-                  ))}
-                </ul>
-                <img
-                  src={country.flags.png}
-                  alt={`Flag of ${country.name.common}`}
-                />
-              </div>
-            )}
-            {countriesToShow.length === 0 && <div>Country not found</div>}
+            {!!country && <Country country={country} />}
             {countriesToShow.length > 10 && (
               <div>Too many matches, specify another filter</div>
             )}
             {countriesToShow.length <= 10 &&
               countriesToShow.length > 1 &&
-              countriesToShow.map((country) => (
-                <div key={country.name.common}>{country.name.common}</div>
-              ))}
+              !country && (
+                <CountryList
+                  countriesToShow={countriesToShow}
+                  handleCCA={handleCCA}
+                />
+              )}
+            {countriesToShow.length === 0 && <div>Country not found</div>}
           </div>
         )}
       </div>

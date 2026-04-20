@@ -7,9 +7,20 @@ const Person = require("./models/person.js");
 const PORT = process.env.PORT;
 const app = express();
 
+const errorHandler = (req, res, next, error) => {
+  console.error(error.message);
+
+  if (error.name === "CastError") {
+    return res.status(400).send({ error: "malformatted id" });
+  }
+
+  res.status(500).send({ error: "internal server error" });
+};
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static("dist"));
+app.use(errorHandler);
 
 morgan.token("body", (req) => {
   return req.method === "POST" ? JSON.stringify(req.body) : "";
@@ -48,21 +59,31 @@ app.post("/api/persons", (req, res) => {
 });
 
 app.get("/api/persons/:id", (req, res) => {
-  const id = req.params.id;
-  const person = persons.find((p) => p.id === id);
-
-  if (person) {
-    res.json(person);
-  } else {
-    res.status(404).end();
-  }
+  const { id } = req.params;
+  // const person = persons.find((p) => p.id === id);
+  Person.findById(id)
+    .then((person) => {
+      if (person) {
+        res.json(person);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).send({ error: "malformatted id" });
+    });
 });
 
 app.delete("/api/persons/:id", (req, res) => {
-  const id = req.params.id;
-
-  persons = persons.filter((p) => p.id !== id);
-  res.status(204).end();
+  const { id } = req.params;
+  Person.findByIdAndDelete(id)
+    .then((result) => {
+      if (result) {
+        res.status(204).end();
+      }
+    })
+    .catch((error) => next(error));
 });
 
 app.get("/api/info", (req, res) => {

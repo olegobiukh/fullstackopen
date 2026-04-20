@@ -1,11 +1,17 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 
-const app = express();
-app.use(express.json());
 const PORT = 3001;
+const app = express();
 
+app.use(express.json());
 app.use(cors());
+
+morgan.token('body', (req) => {
+  return req.method === 'POST' ? JSON.stringify(req.body) : '';
+});
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
 
 let persons = [
   {
@@ -44,9 +50,7 @@ app.get("/api/persons", (req, res) => {
 });
 
 app.post("/api/persons", (req, res) => {
-  const body = req.body;
-  const name = body.name;
-  const number = body.number;
+  const { name, number } = req.body;
 
   if (!name || !number) {
     return res.status(400).json({ error: "name or number is missing" });

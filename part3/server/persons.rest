@@ -11,8 +11,8 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Remzan Klymenkonko",
-    "number": "4566 44 64 545"
+    "name": "Remzan Klymenkonkon",
+    "number": "4566 44 64 574"
 }
 ###
 

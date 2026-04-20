@@ -1,71 +1,50 @@
-import express from "express";
-import cors from "cors";
-import morgan from "morgan";
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+require("dotenv").config();
+const Person = require("./models/person.js");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 const app = express();
-
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('dist'));
+app.use(express.static("dist"));
 
-morgan.token('body', (req) => {
-  return req.method === 'POST' ? JSON.stringify(req.body) : '';
+morgan.token("body", (req) => {
+  return req.method === "POST" ? JSON.stringify(req.body) : "";
 });
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
-
-let persons = [
-  {
-    name: "Arto Hellas",
-    number: "040-123456",
-    id: "1",
-  },
-  {
-    name: "Ada Lovelace",
-    number: "39-44-5323523",
-    id: "2",
-  },
-  {
-    name: "Dan Abramov",
-    number: "12-43-234345",
-    id: "3",
-  },
-  {
-    name: "Mary Poppendieck",
-    number: "39-23-6423122",
-    id: "4",
-  },
-  {
-    name: "Maryk Poppendieck",
-    number: "439-23-6423122",
-    id: "5",
-  },
-];
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body"),
+);
 
 app.get("/api/persons", (req, res) => {
-  res.json(persons);
+  Person.find({}).then((persons) => {
+    res.json(persons);
+  });
 });
 
 app.post("/api/persons", (req, res) => {
   const { name, number } = req.body;
-
-  if (!name || !number) {
-    return res.status(400).json({ error: "name or number is missing" });
+  console.log(name, number);
+  if (name === undefined || number === undefined) {
+    return res.status(400).json({ error: "content missing" });
   }
 
-  if (persons.find((p) => p.name === name)) {
-    return res.status(400).json({ error: "name must be unique" });
-  }
-
-  const newPerson = {
+  const newPerson = new Person({
     name,
     number,
-    id: Math.floor(Math.random() * 1000000).toString(),
-  };
+  });
 
-  persons = [...persons, newPerson];
-  res.json(newPerson);
+  newPerson
+    .save()
+    .then((savedPerson) => {
+      res.json(savedPerson);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send({ error: "failed to save to database" });
+    });
 });
 
 app.get("/api/persons/:id", (req, res) => {

@@ -18,3 +18,9 @@ Content-Type: application/json
 
 ### Get all persons again to verify the deletion
 GET http://localhost:3001/api/persons
+
+### Get all persons again to verify the deletion
+GET http://localhost:3001/api/persons/69e6a943181885a2c931de70
+
+### Get number of people in the phonebook
+GET http://localhost:3001/api/info

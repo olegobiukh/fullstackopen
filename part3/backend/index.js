@@ -58,7 +58,7 @@ app.post("/api/persons", (req, res) => {
     });
 });
 
-app.get("/api/persons/:id", (req, res) => {
+app.get("/api/persons/:id", (req, res, next) => {
   const { id } = req.params;
 
   Person.findById(id)
@@ -70,12 +70,11 @@ app.get("/api/persons/:id", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
-      res.status(400).send({ error: "malformatted id" });
+      next(error);
     });
 });
 
-app.delete("/api/persons/:id", (req, res) => {
+app.delete("/api/persons/:id", (req, res, next) => {
   const { id } = req.params;
   Person.findByIdAndDelete(id)
     .then((result) => {
@@ -86,7 +85,7 @@ app.delete("/api/persons/:id", (req, res) => {
     .catch((error) => next(error));
 });
 
-app.put("/api/persons/:id", (req, res) => {
+app.put("/api/persons/:id", (req, res, next) => {
   const { id } = req.params;
   const { name, number } = req.body;
 
@@ -102,13 +101,16 @@ app.put("/api/persons/:id", (req, res) => {
 });
 
 app.get("/api/info", (req, res) => {
-  const time = new Date();
-  const text = `
-    <p>Phonebook has info for ${persons.length} people</p>
+  Person.countDocuments({})
+    .then((count) => {
+      const time = new Date();
+      const text = `
+    <p>Phonebook has info for ${count} people</p>
     <p>${time}</p>
   `;
 
-  res.send(text);
+      res.send(text);
+    });
 });
 
 app.listen(PORT, () => {

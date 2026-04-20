@@ -37,7 +37,7 @@ app.get("/api/persons", (req, res) => {
 
 app.post("/api/persons", (req, res) => {
   const { name, number } = req.body;
-  console.log(name, number);
+
   if (name === undefined || number === undefined) {
     return res.status(400).json({ error: "content missing" });
   }
@@ -60,7 +60,7 @@ app.post("/api/persons", (req, res) => {
 
 app.get("/api/persons/:id", (req, res) => {
   const { id } = req.params;
-  // const person = persons.find((p) => p.id === id);
+
   Person.findById(id)
     .then((person) => {
       if (person) {
@@ -81,6 +81,21 @@ app.delete("/api/persons/:id", (req, res) => {
     .then((result) => {
       if (result) {
         res.status(204).end();
+      }
+    })
+    .catch((error) => next(error));
+});
+
+app.put("/api/persons/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, number } = req.body;
+
+  Person.findByIdAndUpdate(id, { name, number }, { new: true })
+    .then((updatedPerson) => {
+      if (updatedPerson) {
+        res.json(updatedPerson);
+      } else {
+        res.status(404).end();
       }
     })
     .catch((error) => next(error));

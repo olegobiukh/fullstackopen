@@ -17,11 +17,11 @@ The application is deployed on Render at:
 - **DELETE /api/persons/:id**: Remove an entry.
 - **POST /api/persons**: Add a new entry (validates unique name and presence of number).
 
-🛠 Tech Stack
-Node.js: JavaScript runtime environment.
-Express: Web framework for building the API.
-Morgan: HTTP request logger middleware.
-CORS: Middleware to allow cross-origin requests.
+## 🛠 Tech Stack
+- Node.js: JavaScript runtime environment.
+- Express: Web framework for building the API.
+- Morgan: HTTP request logger middleware.
+- CORS: Middleware to allow cross-origin requests.
 
 ## 🛠 Deployment Notes
 - The frontend was built using `npm run build`.

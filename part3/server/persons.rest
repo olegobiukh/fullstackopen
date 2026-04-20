@@ -1,0 +1,20 @@
+### Get all persons to see current IDs
+GET http://localhost:3001/api/persons
+
+###
+
+### Delete a specific person (e.g., the one with ID 2)
+DELETE http://localhost:3001/api/persons/2
+
+### Add a new person
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Remzan Klymenkonko",
+    "number": "4566 44 64 545"
+}
+###
+
+### Get all persons again to verify the deletion
+GET http://localhost:3001/api/persons

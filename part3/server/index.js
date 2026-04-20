@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
+app.use(express.json());
 const PORT = 3001;
 
 app.use(cors());
@@ -42,8 +43,31 @@ app.get("/api/persons", (req, res) => {
   res.json(persons);
 });
 
+app.post("/api/persons", (req, res) => {
+  const body = req.body;
+  const name = body.name;
+  const number = body.number;
+
+  if (!name || !number) {
+    return res.status(400).json({ error: "name or number is missing" });
+  }
+
+  if (persons.find((p) => p.name === name)) {
+    return res.status(400).json({ error: "name must be unique" });
+  }
+
+  const newPerson = {
+    name,
+    number,
+    id: Math.floor(Math.random() * 1000000).toString(),
+  };
+
+  persons = [...persons, newPerson];
+  res.json(newPerson);
+});
+
 app.get("/api/persons/:id", (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
   const person = persons.find((p) => p.id === id);
 
   if (person) {
@@ -54,7 +78,7 @@ app.get("/api/persons/:id", (req, res) => {
 });
 
 app.delete("/api/persons/:id", (req, res) => {
-  const id = Number(req.params.id);
+  const id = req.params.id;
 
   persons = persons.filter((p) => p.id !== id);
   res.status(204).end();

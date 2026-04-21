@@ -77,13 +77,19 @@ const App = () => {
       return;
     }
 
-    personsService.create({ name: newName, number: newNumber }).then((data) => {
-      setPersons(persons.concat(data));
-      setNewName("");
-      setNewNumber("");
-      setNotification({ type: "success", text: `Added ${newName}` });
-      clearNotification();
-    });
+    personsService
+      .create({ name: newName, number: newNumber })
+      .then((data) => {
+        setPersons(persons.concat(data));
+        setNewName("");
+        setNewNumber("");
+        setNotification({ type: "success", text: `Added ${newName}` });
+        clearNotification();
+      })
+      .catch((error) => {
+        setNotification({ type: "error", text: error.response.data.error });
+        clearNotification();
+      });
   };
 
   const handleDeletePerson = (id) => {

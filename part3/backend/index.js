@@ -7,20 +7,23 @@ const Person = require("./models/person.js");
 const PORT = process.env.PORT;
 const app = express();
 
-const errorHandler = (req, res, next, error) => {
+app.use(cors());
+app.use(express.json());
+app.use(express.static("dist"));
+
+const errorHandler = (error, req, res, next) => {
   console.error(error.message);
 
   if (error.name === "CastError") {
     return res.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    return res.status(400).json({ error: error.message });
   }
 
-  res.status(500).send({ error: "internal server error" });
+  next(error);
 };
 
-app.use(cors());
-app.use(express.json());
-app.use(express.static("dist"));
-app.use(errorHandler);
+
 
 morgan.token("body", (req) => {
   return req.method === "POST" ? JSON.stringify(req.body) : "";
@@ -35,7 +38,7 @@ app.get("/api/persons", (req, res) => {
   });
 });
 
-app.post("/api/persons", (req, res) => {
+app.post("/api/persons", (req, res, next) => {
   const { name, number } = req.body;
 
   if (name === undefined || number === undefined) {
@@ -53,8 +56,7 @@ app.post("/api/persons", (req, res) => {
       res.json(savedPerson);
     })
     .catch((error) => {
-      console.log(error);
-      res.status(500).send({ error: "failed to save to database" });
+      next(error);
     });
 });
 
@@ -101,18 +103,19 @@ app.put("/api/persons/:id", (req, res, next) => {
 });
 
 app.get("/api/info", (req, res) => {
-  Person.countDocuments({})
-    .then((count) => {
-      const time = new Date();
-      const text = `
+  Person.countDocuments({}).then((count) => {
+    const time = new Date();
+    const text = `
     <p>Phonebook has info for ${count} people</p>
     <p>${time}</p>
   `;
 
-      res.send(text);
-    });
+    res.send(text);
+  });
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+app.use(errorHandler);

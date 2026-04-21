@@ -23,8 +23,6 @@ const errorHandler = (error, req, res, next) => {
   next(error);
 };
 
-
-
 morgan.token("body", (req) => {
   return req.method === "POST" ? JSON.stringify(req.body) : "";
 });

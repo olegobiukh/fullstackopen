@@ -27,7 +27,7 @@
 
 ### 📖 Learning Log
 
-| Part | Milestone | Source Code | Content
+| Part | Milestone | Source Code | Content |
 | :--- | :--- | :--- |
 | **Part 0** | Web app architectures | [Browse Code 📂](./part0) | Web app basics, HTML/CSS |
 | **Part 1** | React & Component State | [Browse Code 📂](./part1) | Components, state, hooks |

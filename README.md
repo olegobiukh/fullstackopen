@@ -33,4 +33,4 @@
 | **Part 1** | React & Component State | [Browse Code 📂](./part1) | Components, state, hooks |
 | **Part 2** | Communication with Server | [Browse Code 📂](./part2) | JSON server, effect hooks, styling |
 | **Part 3** | Backend testing | [Node.js & Express 📂](./part3) | Backend basics, deployment, MongoDB |
-| **Part 4** | **Testing Express Servers** (Current) | [Latest Commit 🔗](https://github.com/olegobiukh/fullstackopen/commits/main) | Integration testing (Supertest), Jest, & User Auth
+| **Part 4** | 🚧 Testing Express Servers (Current) | [Latest Commit 🔗](https://github.com/olegobiukh/fullstackopen/commits/main) | Integration testing (Supertest), Jest, & User Auth |

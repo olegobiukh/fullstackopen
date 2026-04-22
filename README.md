@@ -1,6 +1,6 @@
 # 🎓 Full Stack Open 2026
 > My journey through the University of Helsinki's full-stack development course.
-[submission page](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
+
 > **Quick Links:** [📝 Submission App](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) | [📖 Course Material](https://fullstackopen.com/en/)
 
 <p align="left">

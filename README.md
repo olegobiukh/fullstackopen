@@ -1,8 +1,7 @@
 # 🎓 Full Stack Open 2026
 > My journey through the University of Helsinki's full-stack development course.
-
-* [🚀 View Part 3 Code (Node/Express)](https://github.com/olegobiukh/fullstackopen/tree/main/part3)
-* [📞 View Phonebook Frontend](https://github.com/olegobiukh/fullstackopen/tree/main/part2/phonebook)
+[submission page](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
+> **Quick Links:** [📝 Submission App](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) | [📖 Course Material](https://fullstackopen.com/en/)
 
 <p align="left">
   <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square" />

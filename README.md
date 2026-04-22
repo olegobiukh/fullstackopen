@@ -21,10 +21,10 @@
 
 | Part | Milestone | Source Code | Content |
 | :--- | :--- | :--- | :--- |
-| **Part 0** | Web app architectures | [Fundamentals 📂](./part0) | Web app basics, HTML/CSS |
-| **Part 1** | React & Component State | [React Basics 📂](./part1) | Components, state, hooks |
-| **Part 2** | Communication with Server | [Server Communication 📂](./part2) | JSON server, effect hooks, styling |
-| **Part 3** | Backend testing | [Node.js & Express 📂](./part3) | Backend basics, deployment, MongoDB |
-| **Part 4** | 🚧 Testing Express Servers (Current) | [Latest Commit 🔗](https://github.com/olegobiukh/fullstackopen/commits/main) | Integration testing (Supertest), Jest, & User Auth |
+| **0** | Web app architectures | [Fundamentals 📂](./part0) | Web app basics, HTML/CSS |
+| **1** | React & Component State | [React Basics 📂](./part1) | Components, state, hooks |
+| **2** | Communication with Server | [Server Communication 📂](./part2) | JSON server, effect hooks, styling |
+| **3** | Backend testing | [Node.js & Express 📂](./part3) | Backend basics, deployment, MongoDB |
+| **4** | 🚧 Testing Express Servers (Current) | [Latest Commit 🔗](https://github.com/olegobiukh/fullstackopen/commits/main) | Integration testing (Supertest), Jest, & User Auth |
 
 

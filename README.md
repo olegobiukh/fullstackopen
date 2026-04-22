@@ -20,7 +20,7 @@
 ### 📖 Learning Log
 
 | Part | Milestone | Source Code | 
-| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **0** | 🌐 Web app architectures | [Fundamentals 📂](./part0) | 
 | **1** | ⚛️ React & Component State | [React Basics 📂](./part1) | 
 | **2** | 📡 Communication with Server | [Server Communication 📂](./part2) | 

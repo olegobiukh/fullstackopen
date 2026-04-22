@@ -16,22 +16,14 @@
 - **Database:** ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ---
-### 📂 Repository Structure
-
-| Part | Title | Content |
-| :--- | :--- | :--- |
-| **Part 0** | [Fundamentals](./part0) | Web app basics, HTML/CSS |
-| **Part 1** | [React Basics](./part1) | Components, state, hooks |
-| **Part 2** | [Server Communication](./part2) | JSON server, effect hooks, styling |
-| **Part 3** | [Node.js & Express](./part3) | Backend basics, deployment, MongoDB |
 
 ### 📖 Learning Log
 
 | Part | Milestone | Source Code | Content |
 | :--- | :--- | :--- | :--- |
-| **Part 0** | Web app architectures | [Browse Code 📂](./part0) | Web app basics, HTML/CSS |
-| **Part 1** | React & Component State | [Browse Code 📂](./part1) | Components, state, hooks |
-| **Part 2** | Communication with Server | [Browse Code 📂](./part2) | JSON server, effect hooks, styling |
+| **Part 0** | Web app architectures | [Fundamentals 📂](./part0) | Web app basics, HTML/CSS |
+| **Part 1** | React & Component State | [React Basics 📂](./part1) | Components, state, hooks |
+| **Part 2** | Communication with Server | [Server Communication 📂](./part2) | JSON server, effect hooks, styling |
 | **Part 3** | Backend testing | [Node.js & Express 📂](./part3) | Backend basics, deployment, MongoDB |
 | **Part 4** | 🚧 Testing Express Servers (Current) | [Latest Commit 🔗](https://github.com/olegobiukh/fullstackopen/commits/main) | Integration testing (Supertest), Jest, & User Auth |
 

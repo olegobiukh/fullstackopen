@@ -27,7 +27,8 @@ The application is organized into several modules to separate concerns:
 
 I like to include a sample JSON body in the README so I don't have to remember the schema every time I open the project.
 
-```{
+```
+{
   "title": "Clean Code",
   "author": "Robert C. Martin",
   "url": "http://blog.cleancoder.com/",

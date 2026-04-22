@@ -19,12 +19,12 @@
 
 ### 📖 Learning Log
 
-| Part | Milestone | Source Code | Content |
+| Part | Milestone | Source Code | 
 | :--- | :--- | :--- | :--- |
-| **0** | Web app architectures | [Fundamentals 📂](./part0) | Web app basics, HTML/CSS |
-| **1** | React & Component State | [React Basics 📂](./part1) | Components, state, hooks |
-| **2** | Communication with Server | [Server Communication 📂](./part2) | JSON server, effect hooks, styling |
-| **3** | Backend testing | [Node.js & Express 📂](./part3) | Backend basics, deployment, MongoDB |
-| **4** | 🚧 Testing Express Servers (Current) | [Latest Commit 🔗](https://github.com/olegobiukh/fullstackopen/commits/main) | Integration testing (Supertest), Jest, & User Auth |
+| **0** | 🌐 Web app architectures | [Fundamentals 📂](./part0) | 
+| **1** | ⚛️ React & Component State | [React Basics 📂](./part1) | 
+| **2** | 📡 Communication with Server | [Server Communication 📂](./part2) | 
+| **3** | 🟢 Server with Node.js and Express | [Node.js & Express 📂](./part3) |
+| **4** | 🚧 Testing Express Servers (Current) | [Latest Commit 🔗](https://github.com/olegobiukh/fullstackopen/commits/main) | 
 
 

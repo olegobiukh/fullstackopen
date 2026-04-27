@@ -63,19 +63,19 @@ const listWithLotBlogs = [
   },
 ];
 
-describe("total likes", () => {
+describe("favorite blog", () => {
   test("when list is empty", () => {
-    const result = listHelper.totalLikes([]);
-    assert.strictEqual(result, 0);
+    const result = listHelper.favoriteBlog([]);
+    assert.strictEqual(result, null);
   });
 
   test("when list has only one blog, equals the likes of that", () => {
-    const result = listHelper.totalLikes(listWithOneBlog);
-    assert.strictEqual(result, 5);
+    const result = listHelper.favoriteBlog(listWithOneBlog);
+    assert.strictEqual(result, listWithOneBlog[0]);
   });
 
   test("when list has only 5 blogs, equals the likes of that (39)", () => {
-    const result = listHelper.totalLikes(listWithLotBlogs);
-    assert.strictEqual(result, 36);
+    const result = listHelper.favoriteBlog(listWithLotBlogs);
+    assert.strictEqual(result, listWithLotBlogs[2]);
   });
 });

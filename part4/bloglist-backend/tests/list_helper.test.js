@@ -2,17 +2,7 @@ const { test, describe } = require("node:test");
 const assert = require("node:assert");
 const listHelper = require("../utils/list_helper");
 
-const listWithOneBlog = [
-  {
-    _id: "5a422aa71b54a676234d17f8",
-    title: "Go To Statement Considered Harmful",
-    author: "Edsger W. Dijkstra",
-    url: "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf",
-    likes: 5,
-    __v: 0,
-  },
-];
-const listWithLotBlogs = [
+const blogs = [
   {
     _id: "5a422a851b54a676234d17f7",
     title: "React patterns",
@@ -65,9 +55,7 @@ const listWithLotBlogs = [
 
 // dummy
 test("dummy returns one", () => {
-  const blogs = [];
-
-  const result = listHelper.dummy(blogs);
+  const result = listHelper.dummy([]);
   assert.strictEqual(result, 1);
 });
 
@@ -79,12 +67,12 @@ describe("total likes", () => {
   });
 
   test("when list has only one blog, equals the likes of that", () => {
-    const result = listHelper.totalLikes(listWithOneBlog);
-    assert.strictEqual(result, 5);
+    const result = listHelper.totalLikes([blogs[0]]);
+    assert.strictEqual(result, 7);
   });
 
   test("when list has only 5 blogs, equals the likes of that (39)", () => {
-    const result = listHelper.totalLikes(listWithLotBlogs);
+    const result = listHelper.totalLikes(blogs);
     assert.strictEqual(result, 36);
   });
 });
@@ -93,16 +81,54 @@ describe("total likes", () => {
 describe("favorite blog", () => {
   test("when list is empty", () => {
     const result = listHelper.favoriteBlog([]);
-    assert.strictEqual(result, null);
+    assert.deepStrictEqual(result, null, "Expected null for empty list");
   });
 
   test("when list has only one blog, equals the likes of that", () => {
-    const result = listHelper.favoriteBlog(listWithOneBlog);
-    assert.strictEqual(result, listWithOneBlog[0]);
+    const result = listHelper.favoriteBlog([blogs[0]]);
+    assert.deepStrictEqual(
+      result,
+      blogs[0],
+      "Expected the first blog for single-blog list",
+    );
   });
 
   test("when list has only 5 blogs, equals the likes of that (39)", () => {
-    const result = listHelper.favoriteBlog(listWithLotBlogs);
-    assert.strictEqual(result, listWithLotBlogs[2]);
+    const result = listHelper.favoriteBlog(blogs);
+    assert.deepStrictEqual(
+      result,
+      blogs[2],
+      "Expected the third blog for five-blog list",
+    );
+  });
+});
+
+// mostBlogs
+describe("most blogs", () => {
+  test("when list is empty", () => {
+    const result = listHelper.mostBlogs([]);
+    assert.deepStrictEqual(result, null, "Expected null for empty list");
+  });
+
+  const listWithOneBlogExpected = { author: "Michael Chan", blogs: 1 };
+
+  test("when list has only one blog, equals this blog author", () => {
+    const result = listHelper.mostBlogs([blogs[0]]);
+    assert.deepStrictEqual(
+      result,
+      listWithOneBlogExpected,
+      "Expected the first blog for single-blog list",
+    );
+  });
+
+  const listWithFiveBlogsExpected = { author: "Robert C. Martin", blogs: 3 };
+
+  test("when list has only 5 blogs, equals the author with the most blogs", () => {
+    const result = listHelper.mostBlogs(blogs);
+    assert.deepStrictEqual(
+      result,
+      listWithFiveBlogsExpected,
+      "Expected the fifth blog for five-blog list",
+    );
   });
 });

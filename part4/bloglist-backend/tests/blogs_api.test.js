@@ -46,6 +46,17 @@ test.only('blogs are returned as json', async () => {
     assert.strictEqual(response.body.length, initialBlogs.length)
 })
 
+test.only('unique identifier id', async () => {
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+    
+    const blog1 = response.body[0]
+    assert.ok(blog1.id)
+    assert.strictEqual(blog1._id, undefined)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })

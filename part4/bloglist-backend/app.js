@@ -4,6 +4,7 @@ const logger = require("./utils/logger");
 const cors = require("cors");
 const { MONGODB_URI, PORT } = require("./utils/config");
 const blogRouter = require("./controllers/blogs");
+const usersRouter = require('./controllers/users')
 const middleware = require("./utils/middleware");
 
 const app = express();
@@ -17,11 +18,12 @@ mongoose
     logger.error("error connecting to MongoDB:", error.message);
   });
 
-  app.use(cors());
-  app.use(express.json());
-  app.use(middleware.requestLogger);
+app.use(cors());
+app.use(express.json());
+app.use(middleware.requestLogger);
 
 app.use("/api/blogs", blogRouter);
+app.use('/api/users', usersRouter)
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
